@@ -21,7 +21,7 @@ ifdef OS
    FixPath = $(subst /,\,$1)
 else
    ifeq ($(shell uname), Linux)
-      RM = rm -f
+      RM = rm -rf
       FixPath = $1
    endif
 endif
