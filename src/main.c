@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "prime/primes.h"
+#include "primes.h"
 
 int main(){
     int prime = isPrime(3);
