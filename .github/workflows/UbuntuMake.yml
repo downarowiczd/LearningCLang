@@ -14,10 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Auto reconfigure
+      run: autoreconf --install
     - name: configure
       run: ./configure
-
-    - name: Install dependencies
+    - name: Make
       run: make
 
     #- name: Run check
