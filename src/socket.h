@@ -32,6 +32,7 @@
 #else
     #include <sys/socket.h>
     #include <netdb.h>
+    #define h_addr h_addr_list[0] /* for backward compatibility */
 #endif
 
 
@@ -314,7 +315,7 @@ int recvBytes(char buf[], int bufSize, int delay, SOCKET_t sock){
     #if WINDOWS
     setsockopt(sock->socketfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&delay, sizeof(delay));
     #else
-    struct timeval tv = {(long)(delay / 1000), (long)((delay % 1000) * 1000)};
+    timeval tv = {(long)(delay / 1000), (long)((delay % 1000) * 1000)};
     setsockopt(sock->socketfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(tv));
     #endif
 
@@ -333,7 +334,7 @@ void closeSock(SOCKET_t sock){
     #if WINDOWS
     closesocket(sock->socketfd);
     #else
-    close(sock->socketfd)
+    close(sock->socketfd);
     #endif
 
     free(sock);
