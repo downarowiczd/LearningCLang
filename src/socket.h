@@ -50,9 +50,8 @@
 #endif
 #if WINDOWS
     #include "unistd.h"
-#else
-    //#include <unistd.h>
 #endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
