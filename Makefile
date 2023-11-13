@@ -1,8 +1,17 @@
+UNAME := $(shell uname)
+DEBUG := 0
+ifeq ($(UNAME), Linux)
+TARGET = test_linux
+else
+TARGET = test_windows
+OS_LDLIBS = -lws2_32 -lwsock32
+endif
+
 SRC_DIR := src
 OBJ_DIR := obj
 BIN_DIR := bin
 
-EXE := $(BIN_DIR)/hellomake
+EXE := $(BIN_DIR)/$(TARGET)
 SRC := $(wildcard $(SRC_DIR)/*.c)
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -10,9 +19,9 @@ INC_DIRS := ./include
 # (12)Include files add together a prefix, clang make sense that -I flag
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-CFLAGS   := $(INC_FLAGS) -Wall
+CFLAGS   := $(INC_FLAGS) -Wall -pthread -std=c99
 LDFLAGS  := -Llib
-LDLIBS   := -lm
+LDLIBS   := -lm $(OS_LDLIBS)
 
 CC 	 := gcc
 
@@ -26,11 +35,9 @@ else
    endif
 endif
 
-
-
 .PHONY: all clean
 
-all: $(EXE)
+all: clean $(EXE)
 
 $(EXE): $(OBJ) | $(BIN_DIR)
 	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
@@ -44,5 +51,9 @@ $(BIN_DIR) $(OBJ_DIR):
 clean:
 	$(RM) $(BIN_DIR) 
 	$(RM) $(OBJ_DIR)
+
+.PHONY = run
+run: all
+	.\$(EXE)
 
 -include $(OBJ:.o=.d)
