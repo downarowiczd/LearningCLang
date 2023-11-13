@@ -1,4 +1,4 @@
-#ifndef _UNISTD_H
+#if !defined(_UNISTD_H) && defined(_WIN32)
 #define _UNISTD_H    1
 
 /* This is intended as a drop-in replacement for unistd.h on Windows.
