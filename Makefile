@@ -37,7 +37,7 @@ endif
 
 .PHONY: all clean
 
-all: clean $(EXE)
+all: $(EXE)
 
 $(EXE): $(OBJ) | $(BIN_DIR)
 	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
@@ -53,7 +53,7 @@ clean:
 	$(RM) $(OBJ_DIR)
 
 .PHONY = run
-run: all
+run: clear all
 	.\$(EXE)
 
 -include $(OBJ:.o=.d)
