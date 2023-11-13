@@ -7,23 +7,9 @@
  */
 
 #include <stdlib.h>
-#ifdef _WIN32
-    #include <io.h>
-#elif __linux__
-    #include <inttypes.h>
-    #include <unistd.h>
-    #define __int64 int64_t
-    #define _close close
-    #define _read read
-    #define _lseek64 lseek64
-    #define _O_RDONLY O_RDONLY
-    #define _open open
-    #define _lseeki64 lseek64
-    #define _lseek lseek
-    #define stricmp strcasecmp
-#endif
+#include <io.h>
 #include "getopt.h" /* getopt at: https://gist.github.com/ashelly/7776712 */
-//#include <process.h> /* for getpid() and the exec..() family */
+#include <process.h> /* for getpid() and the exec..() family */
 #include <direct.h> /* for _getcwd() and _chdir() */
 
 #define srandom srand

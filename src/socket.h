@@ -46,8 +46,11 @@
     #pragma comment(lib, "ssl");
     #endif
 #endif
-
-#include "unistd.h"
+#if WINDOWS
+    #include "unistd.h"
+#else
+    #include <unistd.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
