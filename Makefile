@@ -23,7 +23,7 @@ INC_DIRS := ./include
 # (12)Include files add together a prefix, clang make sense that -I flag
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-CFLAGS   := $(INC_FLAGS) -Wall -pthread -std=c99
+CFLAGS   := $(INC_FLAGS) -Wall -pthread -std=c99 -D_DEFAULT_SOURCE
 LDFLAGS  := -Llib
 LDLIBS   := -lm $(OS_LDLIBS)
 
