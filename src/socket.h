@@ -32,7 +32,7 @@
 #else
     #include <sys/socket.h>
     #include <netdb.h>
-    //#include <linux/time.h>
+    #include <linux/time.h>
     #define h_addr h_addr_list[0] /* for backward compatibility */
 #endif
 
