@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include "socket.h"
+#include <stdio.h>
 
 // function to be ran on every connection
 void onConn(SOCKET_t conn, void* arg){

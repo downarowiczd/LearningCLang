@@ -47,7 +47,9 @@ clean:
 	$(RM) $(BIN_DIR) 
 	$(RM) $(OBJ_DIR)
 
-run: clean all
-	.\$(EXE)
+run: clean . all
+	./$(EXE)
+
+.NOTPARALLEL:
 
 -include $(OBJ:.o=.d)

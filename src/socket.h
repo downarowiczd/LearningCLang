@@ -23,14 +23,14 @@
     #define MSCcompiler 1
 #endif
 
-#ifdef __cplusplus
-    extern "C" {
-#endif
 
 #if WINDOWS
     #include <winsock2.h>
+    #include "unistd.h"
 #else
     #include <sys/socket.h>
+    #include <unistd.h>
+    #include <arpa/inet.h>
     #include <netdb.h>
     #include <linux/time.h>
     #define h_addr h_addr_list[0] /* for backward compatibility */
@@ -48,9 +48,7 @@
     #pragma comment(lib, "ssl");
     #endif
 #endif
-#if WINDOWS
-    #include "unistd.h"
-#endif
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -340,8 +338,5 @@ void closeSock(SOCKET_t sock){
     free(sock);
 }
 
-#ifdef __cplusplus
-    }
-#endif
 
 #endif // INCLUDED_SOCKET_H
