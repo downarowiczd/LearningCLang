@@ -30,8 +30,6 @@
 # define _GETOPT_H 1
 #endif
 
-#define __GNU_LIBRARY__ 1
-
 /* If __GNU_LIBRARY__ is not already defined, either we are being used
    standalone, or this is the first header included in the source file.
    If we are being used with glibc, we need to include <features.h>, but

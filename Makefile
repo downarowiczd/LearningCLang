@@ -1,10 +1,14 @@
-UNAME := $(shell uname)
-DEBUG := 0
-ifeq ($(UNAME), Linux)
-TARGET = test_linux
+ifdef OS
+   RM = del /Q
+   FixPath = $(subst /,\,$1)
+   TARGET = test_windows
+   OS_LDLIBS = -lws2_32 -lwsock32
 else
-TARGET = test_windows
-OS_LDLIBS = -lws2_32 -lwsock32
+   ifeq ($(shell uname), Linux)
+      RM = rm -rf
+      FixPath = $1
+      TARGET = test_linux
+   endif
 endif
 
 SRC_DIR := src
@@ -25,20 +29,11 @@ LDLIBS   := -lm $(OS_LDLIBS)
 
 CC 	 := gcc
 
-ifdef OS
-   RM = del /Q
-   FixPath = $(subst /,\,$1)
-else
-   ifeq ($(shell uname), Linux)
-      RM = rm -rf
-      FixPath = $1
-   endif
-endif
 
-.PHONY: all clean
+
+.PHONY: all clean run
 
 all: $(EXE)
-
 $(EXE): $(OBJ) | $(BIN_DIR)
 	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
@@ -52,8 +47,7 @@ clean:
 	$(RM) $(BIN_DIR) 
 	$(RM) $(OBJ_DIR)
 
-.PHONY = run
-run: clear all
+run: clean all
 	.\$(EXE)
 
 -include $(OBJ:.o=.d)
