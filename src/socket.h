@@ -316,7 +316,7 @@ int recvBytes(char buf[], int bufSize, int delay, SOCKET_t sock){
     #if WINDOWS
     setsockopt(sock->socketfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&delay, sizeof(delay));
     #else
-    timeval tv = {(long)(delay / 1000), (long)((delay % 1000) * 1000)};
+    struct timeval tv = {(long)(delay / 1000), (long)((delay % 1000) * 1000)};
     setsockopt(sock->socketfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(tv));
     #endif
 
