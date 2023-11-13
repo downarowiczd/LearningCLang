@@ -1,4 +1,4 @@
-name: Linux Make
+name: Linux Build
 
 on:
   push:
